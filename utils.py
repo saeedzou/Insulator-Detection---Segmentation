@@ -21,7 +21,7 @@ def get_unique_dims(path):
 # example 0 0.5 0.5 0.5 0.5
 def generate_yolo_labels(root, xml_path, txt_path):
     
-    for img in os.listdir(xml_path):
+    for img in os.listdir(os.path.join(root, xml_path)):
         tree = ET.parse(os.path.join(root, xml_path, img))
         root = tree.getroot()
         
