@@ -19,10 +19,10 @@ def get_unique_dims(path):
 # make .txt file for each image according to YOLO format
 # class x_center y_center width height
 # example 0 0.5 0.5 0.5 0.5
-def generate_yolo_labels(root, xml_path, txt_path):
+def generate_yolo_labels(root_path, xml_path, txt_path):
     
-    for img in os.listdir(os.path.join(root, xml_path)):
-        tree = ET.parse(os.path.join(root, xml_path, img))
+    for img in os.listdir(os.path.join(root_path, xml_path)):
+        tree = ET.parse(os.path.join(root_path, xml_path, img))
         root = tree.getroot()
         
         for size in root.iter('size'):
@@ -41,7 +41,7 @@ def generate_yolo_labels(root, xml_path, txt_path):
             h = (y_max - y_min) / height
             
             txt_file = img.split('.')[0] + '.txt'
-            with open(os.path.join(root, txt_path, txt_file), 'a') as f:
+            with open(os.path.join(root_path, txt_path, txt_file), 'a') as f:
                 # save with 6 decimal places
                 f.write(f'0 {x_center:.6f} {y_center:.6f} {w:.6f} {h:.6f}\n')
 
