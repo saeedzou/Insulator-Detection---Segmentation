@@ -41,9 +41,10 @@ def generate_yolo_labels(root_path, xml_path, txt_path):
             h = (y_max - y_min) / height
             
             txt_file = img.split('.')[0] + '.txt'
-            with open(os.path.join(root_path, txt_path, txt_file), 'a') as f:
-                # save with 6 decimal places
-                f.write(f'0 {x_center:.6f} {y_center:.6f} {w:.6f} {h:.6f}\n')
+            if not os.path.exists(os.path.join(root_path, txt_path, txt_file)):
+                with open(os.path.join(root_path, txt_path, txt_file), 'a') as f:
+                    # save with 6 decimal places
+                    f.write(f'0 {x_center:.6f} {y_center:.6f} {w:.6f} {h:.6f}\n')
 
 def make_train_valid(root='./InsulatorDataSet', val_size=0.2):
     # make train & valid directories
