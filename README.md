@@ -14,6 +14,15 @@
 
 ## Results
 
+- precision(B): 0.9519
+- recall(B): 0.9644
+- mAP50(B): 0.9607
+- mAP50-95(B): 0.8044
+- precision(M): 0.9519
+- recall(M): 0.9644
+- mAP50(M): 0.9641
+- mAP50-95(M): 0.8358
+
 ![Training results](runs/results.png)
 
 ![Sample Labels](runs/val_batch1_labels.jpg)
