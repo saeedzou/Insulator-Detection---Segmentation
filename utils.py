@@ -55,7 +55,7 @@ def make_train_valid(root='./InsulatorDataSet', val_size=0.2):
     
     categories = ['Normal_Insulators', 'Defective_Insulators']
     for category in categories:
-        images = os.listdir(os.path.join(root, dir, 'images'))
+        images = os.listdir(os.path.join(root, category, 'images'))
         random.shuffle(images)
         val_images = images[:int(val_size * len(images))]
         train_images = images[int(val_size * len(images)):]
