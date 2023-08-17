@@ -29,19 +29,20 @@ def generate_yolo_labels(root_path, xml_path, txt_path):
             width = int(size.find('width').text)
             height = int(size.find('height').text)
 
-        for obj in root.iter('object'):
-            x_min = int(obj.find('bndbox').find('xmin').text)
-            y_min = int(obj.find('bndbox').find('ymin').text)
-            x_max = int(obj.find('bndbox').find('xmax').text)
-            y_max = int(obj.find('bndbox').find('ymax').text)
-            
-            x_center = (x_min + x_max) / (2 * width)
-            y_center = (y_min + y_max) / (2 * height)
-            w = (x_max - x_min) / width
-            h = (y_max - y_min) / height
-            
-            txt_file = img.split('.')[0] + '.txt'
-            if not os.path.exists(os.path.join(root_path, txt_path, txt_file)):
+        txt_file = img.split('.')[0] + '.txt'
+        if not os.path.exists(os.path.join(root_path, txt_path, txt_file)):
+            for obj in root.iter('object'):
+                x_min = int(obj.find('bndbox').find('xmin').text)
+                y_min = int(obj.find('bndbox').find('ymin').text)
+                x_max = int(obj.find('bndbox').find('xmax').text)
+                y_max = int(obj.find('bndbox').find('ymax').text)
+                
+                x_center = (x_min + x_max) / (2 * width)
+                y_center = (y_min + y_max) / (2 * height)
+                w = (x_max - x_min) / width
+                h = (y_max - y_min) / height
+                
+                txt_file = img.split('.')[0] + '.txt'
                 with open(os.path.join(root_path, txt_path, txt_file), 'a') as f:
                     # save with 6 decimal places
                     f.write(f'0 {x_center:.6f} {y_center:.6f} {w:.6f} {h:.6f}\n')
