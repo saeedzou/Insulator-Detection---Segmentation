@@ -75,8 +75,8 @@ def make_train_valid(root='./InsulatorDataSet', val_size=0.2):
             txt_file =  image.split('.')[0] + '.txt'
             shutil.copy(os.path.join(root, category, 'labels', txt_file), 
                         os.path.join(root, 'train/labels', txt_file))
-    
-    # remove categories
+        
+        shutil.rmtree(os.path.join(root, category))
 
 # function to convert  normalized x, y, w, h to x1, y1, x2, y2
 def convert_xywh_xyxy(bbox, height, width):
